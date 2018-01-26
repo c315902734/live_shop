@@ -1,0 +1,14 @@
+sftp-config.json
+/vendor
+dump.rdb
+composer.json
+composer.lock
+.project
+.buildpath
+.settings
+console/runtime/logs
+/.idea
+/.idea/dictionaries
+/.idea/inspectionProfiles
+/.idea/copyright
+/nbproject/private/

@@ -1,0 +1,253 @@
+<?php
+return [
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=nma-tools',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=nma-tools'],
+            ],
+        ],
+        'tools' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=nma-tools',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=nma-tools'],
+            ],
+        ],
+        'vradmin' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vradmin',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vradmin'],
+            ],
+        ],
+        'vradmin1' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vradmin1',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vradmin1'],
+            ],
+        ],
+        'vrlive' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vrlive',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vrlive'],
+            ],
+        ],
+        'vrnews' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vrnews',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vrnews'],
+            ],
+        ],
+        'vrnews1' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vrnews1',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vrnews1'],
+            ],
+        ],
+        'vruser' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vruser',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vruser'],
+            ],
+        ],
+        'vruser1' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vruser1',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vruser1'],
+            ],
+        ],
+        'vrvideo' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.11.89;dbname=vrvideo',
+            'username' => 'web',
+            'password' => 'web',
+            'charset' => 'utf8',
+            'slaveConfig'=>[
+                'username' => 'web',
+                'password' => 'web',
+                'attributes'=>[
+                    // use a smaller connection timeout
+                    PDO::ATTR_TIMEOUT => 10,
+                ],
+                'charset' => 'utf8',
+            ],
+            'slaves'=>[
+                ['dsn'=>'mysql:host=192.168.11.89;dbname=vrvideo'],
+            ],
+        ],
+    	'vrvote' => [
+    		'class' => 'yii\db\Connection',
+    		'dsn' => 'mysql:host=192.168.11.89;dbname=vrvote',
+    		'username' => 'web',
+    		'password' => 'web',
+    		'charset' => 'utf8',
+    		'slaveConfig'=>[
+    				'username' => 'web',
+    				'password' => 'web',
+    				'attributes'=>[
+    					// use a smaller connection timeout
+    					PDO::ATTR_TIMEOUT => 10,
+    				],
+    				'charset' => 'utf8',
+    			],
+    			'slaves'=>[
+    					['dsn'=>'mysql:host=192.168.11.89;dbname=vrvote'],
+    			],
+    	],   
+    	'vrshop' => [
+    			'class' => 'yii\db\Connection',
+    			'dsn' => 'mysql:host=192.168.11.89;dbname=vrshop',
+    			'username' => 'web',
+    			'password' => 'web',
+    			'charset' => 'utf8',
+    			'slaveConfig'=>[
+    					'username' => 'web',
+    					'password' => 'web',
+    					'attributes'=>[
+    					// use a smaller connection timeout
+    		    			PDO::ATTR_TIMEOUT => 10,
+    					],
+    					'charset' => 'utf8',
+    				],
+    				'slaves'=>[
+    						['dsn'=>'mysql:host=192.168.11.89;dbname=vrshop'],
+    			],
+    	],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => true,
+        ],
+        'cache' => [
+            // 'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+        ],
+         'redis' => [
+             'class' => 'yii\redis\Connection',
+             'hostname' => '127.0.0.1',
+             'port' => 6379,
+             'database' => 0,
+//             'password' => 'crs-guq6g1ma:2K9Fr4BXzc2C%',
+         ],
+    ],
+];

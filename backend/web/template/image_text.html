@@ -1,0 +1,699 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" itemprop="description" content="<?php if($news_info['new_abstract']){echo $news_info['new_abstract'];}else{if($news_info['abstract']){echo $news_info['abstract'];}else{echo 'live.lawnewsw.com';}} ?>" />
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6b0374434b039f840d791ce1503b0331";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return '';
+        }
+    </script>
+    <title><?php if($news_info['new_title']){echo $news_info['new_title'];}else{echo $news_info['title'];}?></title>
+
+    <link rel="stylesheet" href="<?php echo C('h5_host');?>/public/H5/css/video/index.css">
+    <link rel="stylesheet" href="<?php echo C('h5_host');?>/public/H5/css/video/new.css">
+    <style type="text/css">
+        .videoplay{
+            width: 100%;
+            height: auto;
+            background:transparent url('<?php echo C('h5_host');?>/public/H5/images/poster1.png') 50% 50% no-repeat;
+            -webkit-background-size:100%;
+            -moz-background-size:100%;
+            -o-background-size:100%;
+            background-size:100%;
+        }
+    </style>
+    <script type="text/javascript" src="<?php echo C('h5_host');?>/public/H5/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo C('h5_host');?>/public/H5/js/template.js"></script>
+    <script type="text/javascript" src="<?php echo C('h5_host');?>/public/H5/js/MD5.js"></script>
+    <?php
+    $signPackage = $jssdk->GetSignPackage();
+    if ($_SERVER['HTTPS'] != "on") {
+    $server = 'http';
+    }else{
+    $server = 'https';
+    }
+    ?>
+    <script language="javascript" type="text/javascript" src="<?php echo C('h5_host');?>/public/js/player/jweixin-1.0.0.js"></script>
+    <script>
+        wx.config({
+            debug:  false,  //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
+            appId: '<?php echo $signPackage["appId"];?>',
+            timestamp: <?php echo $signPackage["timestamp"];?>,
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+                signature: '<?php echo $signPackage["signature"];?>',
+                jsApiList: [  //需要使用的网页服务接口
+            'checkJsApi',  //判断当前客户端版本是否支持指定JS接口
+            'onMenuShareTimeline', //分享给好友
+            'onMenuShareAppMessage', //分享到朋友圈
+            'onMenuShareQQ',  //分享到QQ
+            'onMenuShareWeibo' //分享到微博
+        ]
+        });
+        wx.ready(function () {   //ready函数用于调用API，如果你的网页在加载后就需要自定义分享和回调功能，需要在此调用分享函数。//如果是微信游戏结束后，需要点击按钮触发得到分值后分享，这里就不需要调用API了，可以在按钮上绑定事件直接调用。因此，微信游戏由于大多需要用户先触发获取分值，此处请不要填写如下所示的分享API
+            var
+                    s_title = "<?php if($data['new_title']){echo $data['new_title'];}else{echo $data['title'];}?>",  // 分享标题
+                    s_link = "<?php echo $share;?>",  // 分享链接
+                    s_desc = document.getElementById("s_desc").value,  //分享描述
+                    s_imgUrl = document.getElementById("s_imgUrl").value; // 分享图标
+            //朋友圈
+            wx.onMenuShareTimeline({
+                title: s_title, // 分享标题
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+            //发送给好友
+            wx.onMenuShareAppMessage({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {alert('分享成功')},
+                cancel: function () {alert('分享失败')}
+            });
+            //QQ好友
+            wx.onMenuShareQQ({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+            //腾讯微博
+            wx.onMenuShareWeibo({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+        });
+        wx.error(function (res) {
+            // alert(res.errMsg);  //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
+        });
+    </script>
+
+
+    <style>
+        .nwecer content{width:92%; margin:0px auto; font-size:14px; color:#333; margin-bottom:12px; line-height:22px;}
+        .con img{width:100%;height:100%;}
+        .con .playIcon{position: absolute;top: 50%;left: 50%;height: 40px;width: 40px;margin-left: -20px;margin-top: -20px; }
+
+    </style>
+</head>
+<body>
+<div style="display:none;">
+    <img src="<?php if($data['new_cover_image']){echo $data['new_cover_image'];}else{if($data['cover_image']){echo $data['cover_image'];}else{echo C('h5_host').'/public/H5/images/default.png';}} ?>"/>
+</div>
+<input type="hidden" value="<?php if($data['new_cover_image']){echo $data['new_cover_image'];}else{if($data['cover_image']){echo $data['cover_image'];}else{echo C('h5_host').'/public/H5/images/default.png';}} ?>" id="s_imgUrl">
+<input type="hidden" value="<?php if($data['new_abstract']){echo $data['new_abstract'];}else{if($data['abstract']){echo $data['abstract'];}else{echo 'live.lawnewsw.com';}} ?>" id="s_desc">
+
+<div class="nwecer" style="position:relative;height:auto;margin-top:-40px">
+    <div class="top">
+        <div class="biaoti"><?php echo $data['title'];?></div>
+        <div class="tiem"><?php echo date('m月d日 H:i',strtotime($data['create_time']));?>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php if($data['source_name']) {?>
+            来源：<span ><a style="color:#129aee; display:inline;" href="#" onclick="toSourceId('<?php echo $data["source_id"];?>','<?php echo $data["source_name"];?>');" ><?php echo $data["source_name"];?></a></span> <?php } ?>
+        </div>
+    </div>
+    <div class="con">
+        <?php echo $contents;
+            if(!empty($data['outer_url'])){
+            ?>
+        <div class="ReadText" style="float:right;margin:0 5%;font-size:1.3rem"><a href="<?php echo $data['outer_url'];?>" style="color: #2ea7e0;">阅读原文</a></div>
+        <?php
+            }
+        ?>
+
+    </div>
+
+</div>
+
+<div id="show_links"></div>
+
+
+<div class="tanchubox" id="tanchubox"></div>
+<script type="text/javascript">
+    $(function () {
+        var type = getQueryString('type');
+        if(type == 'thirdParty'){
+            var html = '<div class="download4">'+
+                    '<div class="l_side"></div>'+
+                    '<div class="r_side"><a href="http://api.com/kdemejkzewrmhh/gfdgxereppxkyd/">立即打开</a></div>'+
+                    '</div>';
+            $(".nwecer").after(html);
+        }
+    });
+    function toNewsDetail(newsId, newsType,category,title,sourceName,sourceId,quiz,img) {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        var is_client = '<?php echo $_GET['type'];?>';
+        if (isAndroid && !is_client){
+            window.newsControl.toNews(newsId, newsType,category,title,sourceName,sourceId,quiz,img);
+        } else if(isiOS && !is_client) {
+            toNews(newsId, newsType,category,title,sourceName,sourceId,quiz,img);
+        } else {
+            var url = "<?php echo C('h5_host');?>/home/index/newsDetail?id=" + newsId;
+            window.location.href = url;
+        }
+    }
+    /*视频点击*/
+    var video=document.getElementsByClassName("videoplay");
+    for(var i=0;i<video.length;i++){
+        video[i].onclick=function(){
+            if(this.paused){
+                this.play();
+            }else{
+                this.pause();
+            }
+        }
+    }
+    function clickImage(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.tapImage();
+            FireKong.onClick();
+
+        } else if(isiOS) {
+            tapImage();
+            FireKong.onClick();
+        }
+    }
+
+    $(function(){
+        var oWidth=document.body.clientWidth ;
+        var oHeight=document.body.clientHeight ;
+        // console.log(oWidth);
+        $(".DivImg").css({
+            width:parseInt((oWidth-40)/3),
+            height:parseInt($(".DivImg").width()*0.672),
+        })
+        $(".DivImg").css({
+            height:parseInt($(".DivImg").width()*0.672),
+        })
+        $(".oText").css({
+            width:parseInt((oWidth-105-30))
+        })
+        $(".TextCon1").css({
+            width:parseInt((oWidth-105-30))
+        })
+        $(".TextListImg:last").css({
+            border:"none"
+        })
+        // console.log($(".DivImg").width());
+    })
+</script>
+<script>
+    function openApps(type,news_id) {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        var t = Date.now();
+
+        if(isiOS) {
+            var loadDateTime = new Date();
+            window.setTimeout(function() {
+                        var timeOutDateTime = new Date();
+                        if (timeOutDateTime - loadDateTime < 5000) {
+                            window.location = "https://fzapi.xinhuiwen.com/skip/"+type+"/"+news_id;
+                        } else {
+                            window.history.back();
+                        }
+                    },
+                    25);
+            window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.hkzr.vrnew";
+        }else if(isAndroid){
+            $('body').append("<iframe id='ifr' src='xinhuiwen://newsDetail?id=14757450227&type=image' style='display:none'></iframe>");
+            setTimeout(function(){
+                if(!t || Date.now()-t < 600){
+                    window.location.href = "http://app.xinhuiwen.com/kdemejkzewrmhh/gfdgxereppxkyd/";//android端 下载跳转地址 .apk
+                }
+            },500);
+        }
+    }
+
+
+    function show(Id){
+        document.getElementById("tanchubox").style.display="block";
+        document.getElementById(Id).style.display="block";
+    }
+    function hide(Id){
+        document.getElementById("tanchubox").style.display="none";
+        document.getElementById(Id).style.display="none";
+    }
+    function toSourceId(source_id,source_name){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.toSource(source_id,source_name);
+        } else if(isiOS) {
+            toSource(source_id,source_name);
+        } else {
+            var url = "http://api.com/Api/Newssource/sourceDetail?source_id=" + source_id;
+            window.location.href = url;
+        }
+    }
+    $(function () {
+        //图片视频连接
+        var devHeight=parseInt($(window).width()/(1.8))+'px';
+
+        var imgo=$(".con img").parent();
+        $(".con img").parent().css({
+            "height":devHeight,
+            "display":"block"
+        })
+
+        var opa=$(".con p a");
+        for(var i=0;i<opa.length;i++){
+            if($(opa[i]).attr("href").indexOf(".mp4")>0){
+                $(opa[i]).css({
+                    "position":"relative",
+                    // "display":"block",
+                    "height":devHeight
+                });
+//                var playIcon="<img src='<?php echo C('h5_host');?>/public/images/shipin_bofang.png' class='playIcon'>";
+//                $(opa[i]).append(playIcon);
+            }
+        }
+
+    });
+
+    //    document.getElementById('openApp').onclick = function(e){
+    //        // 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP，并自动阻止a标签的默认行为
+    //        // 否则打开a标签的href链接
+    //        var ifr = document.createElement('iframe');
+    //        ifr.src = 'xinhuiwen://';
+    //        ifr.style.display = 'none';
+    //        document.body.appendChild(ifr);
+    //        window.setTimeout(function(){
+    //            document.body.removeChild(ifr);
+    //        },3000)
+    //    };
+    $(window).load(function() {
+        var id = getQueryString('id');
+        var news_type = getQueryString('news_type');
+        var token = getQueryString('token');
+        var type = getQueryString('type');
+        var appKey = "html";
+        var unique = "xinhuiwen,fighting!";
+        var timestamp = Date.parse(new Date()) / 1000;
+        var md5Val = "app_key=" + appKey + "&timestamp=" + timestamp + "&unique=" + unique;
+        var signature = $.md5(md5Val);
+        var data = {
+            news_id:id,
+            token:token,
+            is_show:'1',
+            timestamp:timestamp,
+            app_key: appKey,
+            unique:unique,
+            sign:signature
+        };
+        $.ajax({
+            type: "get",
+            url: "<?php echo C('host');?>/newslink/getnewslink",
+            data: data,
+            dataType: "jsonp",
+            jsonp: 'callback',
+            jsonpCallback: "success_link",
+            success: function (data) {
+                var html = '';
+                var result = data.ReturnData;
+                var link = result['link_news'];
+                var recommend = result['Recommend_news'];
+//                console.log(link,recommend);
+                if (link.length > 0) {
+                    html += '<div class="newlist1" style="position:relative; margin-top:50px">' +
+                            '<div class="name_wrap">' +
+                            '<div class="newlistname1">关联新闻</div>' +
+                            '</div>' +
+
+                            '<div class="container1">' +
+                            '<div class="sectionBox" style="padding-bottom:30px">';
+                    for (var i = 0; i < link.length; i++) {
+                        var play_count = link[i]['play_count'] ? link[i]['play_count'] : 0;
+                        if (link[i]['type'] == 4) {
+                            if (type) {
+                                html += '<a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextListImg ">' +
+                                        '<div class=" oImg oTimeBox">' +
+                                        '<img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%">' +
+                                        '<div class="oTime">' +
+                                        '<div class="zheZhao">' +
+                                        '<span><a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1" style="color:#fff"><img src="/public/H5/images/bofang_hdpi.png" style="margin-right:5px;padding-left:5px;width:15%;height:15%" >' + link[i]['duration'] + '</a></span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' + link[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"><img src="/public/H5/images/bofangcishu@2x.png" style="width:10px;height:10px;padding-right:5px;vertical-align:middle;" >' + play_count + '</span></p>' +
+
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' +
+                                        '<div class="TextListImg ">' +
+                                        '<div class=" oImg oTimeBox">' +
+                                        '<img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%">' +
+                                        '<div class="oTime">' +
+                                        '<div class="zheZhao">' +
+                                        '<span><a href="" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'" style="color:#fff"><img src="/public/H5/images/bofang_hdpi.png" style="margin-right:5px;padding-left:5px;width:15%;height:15%" >' + link[i]['duration'] + '</a></span>' +
+                                        '</div>' +
+                                        '/div>' +
+                                        '/div>' +
+                                        'div class="oText">' +
+                                        '<p class="TextTittle"><a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' + link[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"><img src="/public/H5/images/bofangcishu@2x.png" style="width:10px;height:10px;padding-right:5px;vertical-align:middle;" >' + play_count + '</span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        } else if (link[i]['type'] == '1' || link[i]['type'] == '7') {
+                            if (type) {
+                                html += '<a href="<?php echo C("admin_host");?>/text/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextListImg">' +
+                                        '<div class="oImg">' +
+                                        '<a href="<?php echo C("admin_host");?>/text/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1"><img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%"></a>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="<?php echo C("admin_host");?>/text/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' + link[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' +
+                                        '<div class="TextListImg">' +
+                                        '<div class="oImg">' +
+                                        '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'"><img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%"></a>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="javascript:;" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' + link[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        }
+                        else if (link[i]['type'] == '6') {
+                            if (type) {
+                                html += '<a href="<?php echo C("admin_host");?>/text/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextList">' +
+                                        '<p class="TextTittle" ><a href="<?php echo C("admin_host");?>/text/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' + link[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon" style="width:100%"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' +
+                                        '<div class="TextList">' +
+                                        '<p class="TextTittle" ><a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">{link[i].title}</a></p>' +
+                                        '<p class="TextCon" style="width:100%"><span >' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        }
+                        else {
+                            if (link[i]['type'] == '5') {
+                                if (type) {
+                                    html += '<a href="<?php echo C("admin_host");?>/photos/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                            '<div class="ImgArry">' +
+                                            '<p class=" ImgTitle"><a href="<?php echo C("admin_host");?>/photos/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1" >' + link[i]['title'] + '</a></p>' +
+                                            '<div class="oPic">';
+                                    for (var i = 0; i < link[i]['content'].length; i++) {
+                                        if (i < 3) {
+                                            html += '<a href="<?php echo C("admin_host");?>/photos/' + link[i]['news_id'] + '.html?id='+link[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1"><img class="DivImg';
+                                            if (i == 1) {
+                                                html += ' Middle';
+                                            } else if (i == 2) {
+                                                html += ' last';
+                                            }
+                                            html += '" src="' + link[i]['content'][i]['img'] + '" name="' + i + '" onclick="clickImage()" style="width:131px; height:88px;"></a>';
+                                        }
+                                    }
+                                    html += '</div>' +
+                                            '<p class="TextCon" style="width:100%"><span style="">' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span></p>' +
+                                            '</div>' +
+                                            '</a>';
+                                } else {
+                                    html += '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'">' +
+                                            '<div class="ImgArry">' +
+                                            '<p class=" ImgTitle"><a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'"' +
+                                            ';">' + link[i]['title'] + '</a></p>' +
+                                            '<div class="oPic">';
+                                    for (var i = 0; i < link[i]['content'].length; i++) {
+                                        if (i < 3) {
+                                            html += '<a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'"' +
+                                                    ' ;"><img class="DivImg';
+                                            if (i == '1') {
+                                                html += ' Middle';
+                                            } else if (i == '2') {
+                                                html += ' last';
+                                            }
+                                            html += '" src="' + link[i]['content'][i]['img'] + '" name="' + i + '" onclick="clickImage()" style="width:131px; height:88px;"></a>';
+                                        }
+                                    }
+                                    html += '</div>' +
+                                            '<p class="TextCon" style="width:100%"><span style="">' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span></p>' +
+                                            '</div>' +
+                                            '</a>';
+                                }
+                            } else {
+                                if (type) {
+                                    html += '<a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                            '<div class="ImgArry1">' +
+                                            '<p class=" ImgTitle"><a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' + link[i]['title'] + '</a></p>' +
+                                            '<div class="oPic">' +
+                                            '<div class="DivImg1"><a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + link[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1"><img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%"></a></div>' +
+                                            '</div>' +
+                                            '<p class="TextCon" style="width:100%"><span style="">' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                            '</div>' +
+                                            '</a>';
+                                } else {
+                                    html += '<a href="#">' +
+                                            '<div class="ImgArry1">' +
+                                            '<p class=" ImgTitle"><a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'"' +
+                                            ';">' + link[i]['title'] + '</a></p>' +
+                                            '<div class="oPic">' +
+                                            '<div class="DivImg1"><a href="#" class="click_link" data-news_id="' + link[i].news_id + '" data-type="' + link[i].type + '" data-category="' + link[i].category + '" data-title="'+ link[i].title +'" data-source_id="'+ link[i].source_id +'" data-reference_type="'+link[i].reference_type+'" data-source_name="'+link[i].source_name+'" data-cover_image="'+link[i].cover_image+'"' +
+                                            ';"><img src="' + link[i]['cover_image'] + '" style="width:100%;height:100%"></a></div>' +
+                                            '</div>' +
+                                            '<p class="TextCon" style="width:100%"><span style="">' + link[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + link[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                            '</div>' +
+                                            '</a>';
+                                }
+                            }
+                        }
+                        html += '</div>' +
+                                '</div>' +
+                                '</div>';
+                    }
+                    html += '<div style="width:100%;height:15px;background:#d5d5d5"></div>';
+
+                }
+                if (recommend.length > 0) {
+                    html += '<div class="newlist1" style="position:relative; ';
+                    if (!link) {
+                        html += 'margin-top:50px';
+                    }
+                    html += '">' +
+                            '<div class="name_wrap">' +
+                            '<div class="newlistname1">推荐阅读</div>' +
+                            '</div>' +
+                            '<div class="container1">' +
+                            '<div class="sectionBox">';
+                    for (var i = 0; i < recommend.length; i++) {
+                        var play_count = recommend[i]['play_count'] ? recommend[i]['play_count'] : 0;
+                        if (recommend[i]['type'] == '4') {
+                            if (type) {
+                                html += '<a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextListImg ">' +
+                                        '<div class=" oImg oTimeBox">' +
+                                        '<img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%">' +
+                                        '<div class="oTime">' +
+                                        '<div class="zheZhao">' +
+                                        '<span><a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1" style="color:#fff"><img src="<?php echo C("h5_host");?>/H5/images/bofang_hdpi.png" style="margin-right:5px;padding-left:5px;width:15%;height:15%" >' + recommend[i]['duration'] + '</a></span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="<?php echo C("h5_host");?>/home/video/video?news_id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"><img src="<?php echo C("h5_host");?>/H5/images/bofangcishu@2x.png" style="width:10px;height:10px;padding-right:5px;vertical-align:middle;" >' + play_count + '</span></p>' +
+
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' +
+                                        '<div class="TextListImg ">' +
+                                        '<div class=" oImg oTimeBox">' +
+                                        '<img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%">' +
+                                        '<div class="oTime">' +
+                                        '<div class="zheZhao">' +
+                                        '<span><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'" style="color:#fff"><img src="<?php echo C("h5_host");?>/H5/images/bofang_hdpi.png" style="margin-right:5px;padding-left:5px;width:15%;height:15%" >' + recommend[i]['duration'] + '</a></span>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"><img src="<?php echo C("h5_host");?>/H5/images/bofangcishu@2x.png" style="width:10px;height:10px;padding-right:5px;vertical-align:middle;" >' + play_count + '</span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        } else if (recommend[i]['type'] == '1' || recommend[i]['type'] == '7') {
+                            if (type) {
+                                html += '<a href="<?php echo C("admin_host");?>/text/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextListImg">' +
+                                        '<div class="oImg">' +
+                                        '<a href="<?php echo C("admin_host");?>/text/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1"><img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%"></a>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="<?php echo C("admin_host");?>/text/' + recommend[i]['news_id'] +'&type=thirdParty&from=singlemessage&isappinstalled=1">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' +
+                                        '<div class="TextListImg">' +
+                                        '<div class="oImg">' +
+                                        '<a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'"><img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%"></a>' +
+                                        '</div>' +
+                                        '<div class="oText">' +
+                                        '<p class="TextTittle"><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon TextCon1" style="margin-top:13px;"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        } else if (recommend[i]['type'] == '6') {
+                            if (type) {
+                                html += '<a href="<?php echo C("admin_host");?>/text/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="TextList">' +
+                                        '<p class="TextTittle" ><a href="<?php echo C("admin_host");?>/text/' + recommend[i]['news_id'] +'.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon" style="width:100%"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' +
+                                        '<div class="TextList">' +
+                                        '<p class="TextTittle" ><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' + recommend[i]['title'] + '</a></p>' +
+                                        '<p class="TextCon" style="width:100%"><span >' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        } else if (recommend[i]['type'] == '5') {
+                            if (type) {
+                                html += '<a href="<?php echo C("admin_host");?>/photos/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="ImgArry">' +
+                                        '<p class=" ImgTitle"><a href="<?php echo C("admin_host");?>/photos/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1" >' + recommend[i]['title'] + '</a></p>' +
+                                        '<div class="oPic">';
+                                for (var i = 0; i < recommend[i]['content'].length; i++) {
+                                    if (i < 3) {
+                                        html += '<a href="<?php echo C("admin_host");?>/photos/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1"><img class="DivImg';
+                                        if (i == '1') {
+                                            html += ' Middle';
+                                        } else if (i == '2') {
+                                            html += ' last';
+                                        }
+                                        html += '" src="' + recommend[i]['content'][i]['img'] + '" name="' + i + '" onclick="clickImage()" style="width:131px; height:88px;"></a>';
+                                    }
+                                }
+                                html += '</div>' +
+                                        '<p class="TextCon" style="width:100%"><span style="">' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' +
+                                        '<div class="ImgArry">' +
+                                        '<p class=" ImgTitle"><a href="#" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' + recommend[i]['title'] + '</a></p>' +
+                                        '<div class="oPic">';
+                                for (var i = 0; i < recommend[i]['content'].length; i++) {
+                                    if (i < 3) {
+                                        html += '<a href="<?php echo C("admin_host");?>/photos/' + recommend[i]['news_id'] + '.html?id='+recommend[i]['news_id']+'&type=thirdParty&from=singlemessage&isappinstalled=1"><img class="DivImg';
+                                        if (i == '1') {
+                                            html += ' Middle';
+                                        } else if (i == '2') {
+                                            html += ' last';
+                                        }
+                                        html += '" src="' + recommend[i]['content'][i]['img'] + '" name="' + i + '" onclick="clickImage()" style="width:131px; height:88px;"></a>';
+                                    }
+                                }
+                                html += '</div>' +
+                                        '<p class="TextCon" style="width:100%"><span style="">' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        } else {
+                            if (type) {
+                                html += '<a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' +
+                                        '<div class="ImgArry1">' +
+                                        '<p class=" ImgTitle"><a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1">' + recommend[i]['title'] + '</a></p>' +
+                                        '<div class="oPic">' +
+                                        '<div class="DivImg1"><a href="<?php echo C("h5_host");?>/home/index/newsDetail?id=' + recommend[i]['news_id'] + '&type=thirdParty&from=singlemessage&isappinstalled=1"><img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%"></a></div>' +
+                                        '</div>' +
+                                        '<p class="TextCon" style="width:100%"><span style="">' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            } else {
+                                html += '<a href="javascript:;">' +
+                                        '<div class="ImgArry1">' +
+                                        '<p class=" ImgTitle"><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'">' + recommend[i]['title'] + '</a></p>' +
+                                        '<div class="oPic">' +
+                                        '<div class="DivImg1"><a href="javascript:;" class="click_link" data-news_id="' + recommend[i].news_id + '" data-type="' + recommend[i].type + '" data-category="' + recommend[i].category + '" data-title="'+ recommend[i].title +'" data-source_id="'+ recommend[i].source_id +'" data-reference_type="'+recommend[i].reference_type+'" data-source_name="'+recommend[i].source_name+'" data-cover_image="'+recommend[i].cover_image+'"><img src="' + recommend[i]['cover_image'] + '" style="width:100%;height:100%"></a></div>' +
+                                        '</div>' +
+                                        '<p class="TextCon" style="width:100%"><span style="">' + recommend[i]['source_name'] + '</span><span class="DuJia" style="float:right">' + recommend[i]['subtitle'] + '</span><span style="float:right; padding-right:10px"></span></p>' +
+                                        '</div>' +
+                                        '</a>';
+                            }
+                        }
+                    }
+                    html += '</div>' +
+                            '</div>' +
+                            '</div>';
+                }
+                $(".nwecer").after(html);
+            }
+        })
+        $("body").on("click", ".click_link", function(e) {
+            e.preventDefault();
+            var newsType = $(this).data("type");
+            var sourceId = $(this).data("source_id");
+            var newsId = $(this).data("news_id");
+            var title = $(this).data("title");
+            var sourceName = $(this).data("source_name");
+            var img = $(this).data("cover_image");
+            var quiz = $(this).data("reference_type");
+            var category = $(this).data("category");
+            toNewsDetail(newsId, newsType,category,title,sourceName,sourceId,quiz,img)
+    })
+    });
+
+
+</script>
+</body>
+</html>
+

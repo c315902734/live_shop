@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" itemprop="description" content="{{description}}" />
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6b0374434b039f840d791ce1503b0331";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{h5_host}}/public/H5/css/new.css">
+    <script language="javascript" type="text/javascript" src="{{h5_host}}/public/js/player/jweixin-1.0.0.js"></script>
+    <script>
+        wx.config({
+            debug:  false,  //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
+            appId: '{{appId}}',
+            timestamp: '{{timestamp}}',
+            nonceStr: '{{nonceStr}}',
+            signature: '{{signature}}',
+            jsApiList: [  //需要使用的网页服务接口
+                'checkJsApi',  //判断当前客户端版本是否支持指定JS接口
+                'onMenuShareTimeline', //分享给好友
+                'onMenuShareAppMessage', //分享到朋友圈
+                'onMenuShareQQ',  //分享到QQ
+                'onMenuShareWeibo' //分享到微博
+            ]
+        });
+        wx.ready(function () {   //ready函数用于调用API，如果你的网页在加载后就需要自定义分享和回调功能，需要在此调用分享函数。//如果是微信游戏结束后，需要点击按钮触发得到分值后分享，这里就不需要调用API了，可以在按钮上绑定事件直接调用。因此，微信游戏由于大多需要用户先触发获取分值，此处请不要填写如下所示的分享API
+            var
+                    s_title = "{{title}}",  // 分享标题
+                    s_link = "{{share}}",  // 分享链接
+                    s_desc = document.getElementById("s_desc").value,  //分享描述
+                    s_imgUrl = document.getElementById("s_imgUrl").value; // 分享图标
+            //朋友圈
+            wx.onMenuShareTimeline({
+                title: s_title, // 分享标题
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+            //发送给好友
+            wx.onMenuShareAppMessage({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {alert('分享成功')},
+                cancel: function () {alert('分享失败')}
+            });
+            //QQ好友
+            wx.onMenuShareQQ({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+            //腾讯微博
+            wx.onMenuShareWeibo({
+                title: s_title, // 分享标题
+                desc: s_desc, // 分享描述
+                link: s_link, // 分享链接
+                imgUrl: s_imgUrl, // 分享图标
+                success: function () {alert('分享成功') },
+                cancel: function () {alert('分享失败') }
+            });
+        });
+        wx.error(function (res) {
+            // alert(res.errMsg);  //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
+        });
+    </script>
+
+
+    <script src="{{h5_host}}/public/js/zepto.min.js"></script>
+    <script src="{{h5_host}}/public/js/index.js"></script>
+    <style>
+        @charset "utf-8";
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}fieldset,img{border:0;}li{list-style:none;}h1,h2,h3,h4,h5,h6{font-weight:normal;}input,button,textarea,select,optgroup,option{font:inherit;}a{text-decoration:none;}.clear{clear:both;}
+        body{font-size:62.5%;background:#fafafa;font-family:Arial,"Microsoft Yahei",Helvetica,sans-serif;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-text-size-adjust:none;overflow-x:hidden;-webkit-overflow-scrolling:touch; /*-webkit-user-select:none;*/ margin:0 0 55px;}
+
+
+
+        img{display:block;}
+
+        #lookImg{width:100%; height:100%; position:fixed; top:0; left:0; bottom:0; z-index:20; overflow:hidden; }
+        #bigImg{ width:100%; height:100%; position:absolute; top:0; left:0; bottom:0; z-index:20; background:#000; overflow:hidden;}
+        #bigBnimg{ position:absolute; left:0;  height:90%; overflow:hidden; text-align:center;}
+        #bigBnimg li{ display:table; /*height:100%;*/ float:left; vertical-align: middle; height:100%;}
+        #bigBnimg img{ position:relative; top:0;-webkit-transform:translateZ(0);transform:translateZ(0);opacity: 1;}
+        #bigBnimg div{ display:table-cell; vertical-align:middle; width:100%; height:100%;}
+        #bigImgControl{width:100%;position:fixed; left:0; bottom:0; z-index:30;border-top:1px solid #fff}
+        #bigImgControl .rightNumer{ float:left; display:block; color:#cacaca; font-size:2.2em; margin-left:10px;margin-top: 15px;}
+        /* 修改样式 */
+        #bigImgControl .leftImg{ float:right; display:block;font-size:2.2em; margin:10px 10px;}
+        #bigImgControl .leftImg img{height:30px;height；30px}
+        #bigImgControl .rightNumer span{ font-size:0.8em;}
+        .powered{ width:32%; margin:0 auto 20px auto;}
+
+        #hertop{width:100%; height:45px; background:#000; position:absolute; left:0px; top:0px; z-index:30;}
+        #hertop .fanhui{ float:left; margin-left:10px; margin-top:12px; height:25px;}
+        #hertop .laiyan{ float:right; margin-right:10px; margin-top:12px; height:25px; color:#fff; font-size:14px; line-height:27px; }
+        #hertop .laiyan img{ float:right; margin-left:5px;}
+        .neirongbox{ position:absolute; width:90%; padding:10px 5% 30px 5%; background:url({{h5_host}}/public/images/bg.png) repeat; top:77%; height:auto; z-index:29;}
+        .neirong{ color:#fff; display:none;padding-bottom:15px; }
+        .neirong .biaoti{ float:left; width:100%;}
+        .neirong .left{ font-size:18px; float:left;}
+        .neirong .right{ float:right; display:block; color:#cacaca; font-size:2.2em;}
+        .neirong .right span{ font-size:0.8em;}
+        .neirong p{ font-size:14px; color:#ccc; text-align:justify;}
+
+        .neirongbox .zzbox1{background:url({{h5_host}}/public/H5/images/zzbg1.png) bottom repeat-x; width:100%; height:76px; bottom:0px; position:fixed; z-index:99999;}
+        .bottom_bars{ background:#000000; position:fixed; bottom:0; width:100%; height:39px; z-index:30; border-top:solid 1px #666; padding-top:6px;}
+        .bottom_bars .pinglun{float:left; width:70%;}
+        .bottom_bars .pinglun .input1{border-radius:5px; background:#323232 url({{h5_host}}/public/H5/images/ico6a.png) 10px center no-repeat; height:32px; line-height:32px; padding:0 10px 0 40px; margin:0 0 0 10px; border:0; width:81%;font-family:"微软雅黑"; border:solid 1px #333;outline:none; font-size:12px; color:#999}
+        .bottom_bars .pinglun .input1:focus{background:#fff; color:#333;padding:0 40px 0 10px;}
+        .bottom_bars .pinglun_f{float:right; padding:0px 5px;}
+        .bottom_bars .pinglun_f a.btn{background:url({{h5_host}}/public/H5images/ico4a.png) no-repeat; background-size:100%; width:32px; height:32px; display:block;}
+        .bottom_bars .pinglun_f a.btn1{background:url({{h5_host}}/public/H5/images/ico41a.png) no-repeat; background-size:100%; width:32px; height:32px;display:block;}
+        .bottom_bars .pinglun_s{float:right; padding:0px 5px;}
+        .bottom_bars .pinglun_s a.btn{background:url({{h5_host}}/public/H5/images/ico3a.png) no-repeat; background-size:100%; width:32px; height:32px; display:block;}
+        .bottom_bars .xian{ float:right; width:1px; height:22px; background:#fff; position:relative; top:5px;}
+        /*--蓝色半透明--*/
+        .download4{ width:100%; height:50px;clear:both;position:fixed; bottom:0px; z-index:30; background:url({{h5_host}}/public/H5/images/bg_blue.png) repeat;}
+        .download4 .l_side{float:left; height:40px;margin:5px 0 0 3%; display:inline-block; background:url({{h5_host}}/public/H5/images/download_logo.png) left top no-repeat; background-size:contain; width:200px;}
+        .download4 .r_side{float:right; margin:10px 3% 0 0;}
+        .download4 .r_side a{background:#fff; color:#333; border-radius:5px; padding:0 10px; height:30px; line-height:30px; display:inline-block; font-size:12px}
+
+
+    </style>
+</head>
+<script>
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return '';
+    }
+    $(function () {
+        var type = getQueryString('type');
+        if(type == 'thirdParty'){
+            var html = '<div class="download4">'+
+                    '<div class="l_side"></div>'+
+                    '<div class="r_side"><a href="{{host}}/kdemejkzewrmhh/gfdgxereppxkyd/">立即打开</a></div>'+
+                    '</div>';
+            $("#lookImg").after(html);
+        }else{
+            var html = '<div id="bigImgControl">'+
+                    '<span class="rightNumer" style="display:none;"></span>'+
+                    '<span class="leftImg" style="display:none;" style="display:none;" onclick="downloadImg()"><img src="{{h5_host}}/public/images/loading.png" ></span>'+
+                    '</div>';
+            $("#bigImg").after(html);
+        }
+    });
+    function clickImage(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.tapImage();
+            FireKong.onClick();
+
+        } else if(isiOS) {
+            tapImage();
+            FireKong.onClick();
+        }
+    }
+
+    function openApps() {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        var t = Date.now();
+        // alert(isiOS);
+        // alert(isAndroid);
+        if(isiOS) {
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            // alert('11');
+            //     alert
+            //抛出schemes,打开app对应页面
+            window.location.href = "xinhuiwen://newsDetail?id=14757450227&type=image";
+
+            //由于部分ios中打开app后，WAP页面会被挂起，定时器不会被执行。因此可以做下优化：
+            //WAP页重新被聚焦后，如果超过1s，认为APP被打开了，重新聚焦时就不必再跳转到APP下载页
+            var loadDateTime = Date.now();
+            window.setTimeout(function () {
+                var timeOutDateTime = Date.now();
+                if (timeOutDateTime - loadDateTime < 1000) {
+                    window.location.href = "https://itunes.apple.com/us/app/fa-zhi-yu-xin-wen/id1133184252";
+                }
+            }, 25);
+        }else if(isAndroid){
+            $('body').append("<iframe id='ifr' src='xinhuiwen://newsDetail?id=14757450227&type=image' style='display:none'></iframe>");
+            setTimeout(function(){
+                if(!t || Date.now()-t < 600){
+                    window.location.href = "http://app.xinhuiwen.com/kdemejkzewrmhh/gfdgxereppxkyd/";//android端 下载跳转地址 .apk
+                }
+            },500);
+        }
+    }
+
+    function toSourceId(source_id,source_name){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.toSource(source_id,source_name);
+        } else if(isiOS) {
+            toSource(source_id,source_name);
+        } else {
+            var url = "{{h5_host}}/Api/Newssource/sourceDetail?source_id=" + source_id;
+            window.location.href = url;
+        }
+    }
+
+
+</script>
+<body>
+<div style="display:none;">
+	<img src="{{cove_img}}"/>
+</div>
+<input type="hidden" value="{{new_cover_img}}" id="s_imgUrl">
+<input type="hidden" value="{{abstract}}" id="s_desc">
+
+
+<div class="text" style="display:none;">
+    {{text}}
+
+</div>
+<div class="neirongbox">
+  {{content}}
+
+</div>
+<div id="lookImg">
+    <div id="bigImg">
+        <ul id="bigBnimg">
+        </ul>
+    </div>
+
+</div>
+
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>
+<script type="text/javascript">
+
+    /* var downloadImg=document.getElementsByClassName("leftImg") */
+
+    function downloadImg(){
+
+        var select_img 	   = $('.rightNumer').html();
+        var select_img_arr = select_img.split('/');
+        var select_id 	   = select_img_arr[0];
+        var param = select_id-1;
+        if(!param || param<0){
+            param = 0;
+        }
+
+//        var select_src = $("li div img:eq("+param+")").attr('src');
+        var select_src = $("li div img")[param].src;
+
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.ClientDownLoadImg(select_src);
+            FireKong.onClick();
+        }else if(isiOS){
+            ClientDownLoadImg(select_src);
+            FireKong.onClick();
+        }
+        return false;
+    }
+    function clickImage(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            window.newsControl.tapImage();
+            FireKong.onClick();
+
+        } else if(isiOS) {
+            tapImage();
+            FireKong.onClick();
+        }
+    }
+</script>
+</html>
+

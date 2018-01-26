@@ -1,0 +1,287 @@
+#invite-container {
+  width: 100%;
+  height: 100%;
+  background: #f7b239;
+  padding-bottom: 50px;
+  text-align: center; }
+  #invite-container .invite-logo {
+    height: 170px; }
+    #invite-container .invite-logo img {
+      width: 100%;
+      height: 100%;
+      display: block; }
+  #invite-container .lucky-bag {
+    position: relative; }
+    #invite-container .lucky-bag img {
+      position: absolute;
+      left: 0;
+      top: -30px;
+      width: 100px;
+      height: 100px;
+      z-index: 2; }
+  #invite-container section {
+    width: 92%;
+    padding: 0 4%;
+    overflow: hidden;
+    position: relative; }
+    #invite-container section .user-title {
+      border-radius: 10px;
+      padding: 5px 10px;
+      background: url(../images/fudai-bk.png) no-repeat center center;
+      background-size: 100% 100%; }
+      #invite-container section .user-title li {
+        width: 100%;
+        color: #999;
+        text-align: center;
+        font-size: 12px; }
+        #invite-container section .user-title li .header-img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 1px solid #e5e5e5;
+          display: inline-block; }
+        #invite-container section .user-title li img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%; }
+        #invite-container section .user-title li .user-name {
+          display: block;
+          color: #333; }
+      #invite-container section .user-title li:nth-child(2) {
+        padding: 5px; }
+    #invite-container section .user-register {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 10px; }
+      #invite-container section .user-register ul {
+        border-radius: 10px;
+        background: #fff2c1;
+        overflow: hidden;
+        width: 65%;
+        padding: 10px 17%; }
+        #invite-container section .user-register ul li {
+          width: 100%;
+          height: 36px;
+          line-height: 36px;
+          margin-top: 10px;
+          font-size: 14px; }
+          #invite-container section .user-register ul li .user-info-input {
+            border: none;
+            float: left;
+            height: 100%;
+            font-size: 12px;
+            width: 100%;
+            padding-left: 3%;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+        #invite-container section .user-register ul .li-input {
+          border: 1px solid #999;
+          box-sizing: border-box; }
+        #invite-container section .user-register ul .middle {
+          position: relative; }
+        #invite-container section .user-register ul li:nth-child(5) {
+          margin-top: 20px; }
+        #invite-container section .user-register ul .last {
+          height: 20px;
+          line-height: 0;
+          padding: 5px;
+          margin-top: 0; }
+      #invite-container section .user-register .code {
+        position: relative; }
+      #invite-container section .user-register .phonecode {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        background: #2ea7e0;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-size: 12px;
+        padding: 0 5px; }
+      #invite-container section .user-register .save-btn {
+        height: 40px;
+        border: none;
+        width: 100%;
+        background: #2ea7e0;
+        border-radius: 5px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        outline: none;
+        color: #fff;
+        -webkit-appearance: none;
+        font-size: 14px; }
+      #invite-container section .user-register .service {
+        width: 100%;
+        padding-top: 10px;
+        font-size: 12px;
+        display: inline-block;
+        text-align: left; }
+        #invite-container section .user-register .service .radio {
+          outline: none;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+        #invite-container section .user-register .service a {
+          color: #999;
+          padding-left: 10px; }
+    #invite-container section .rule {
+      margin-top: 20px;
+      padding: 20px 20px;
+      background: #fff2c1;
+      border-radius: 10px;
+      text-align: justify; }
+      #invite-container section .rule .line {
+        border-bottom: 1px dashed #ee1212;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        text-align: center; }
+        #invite-container section .rule .line h3 {
+          position: absolute;
+          top: -15px;
+          padding: 0 10px;
+          background: #fff2c1;
+          margin-left: -47px;
+          left: 50%;
+          color: #ee1212; }
+      #invite-container section .rule ul {
+        padding-top: 20px; }
+        #invite-container section .rule ul li {
+          color: #333;
+          line-height: 20px;
+          font-size: 14px;
+          padding-bottom: 5px; }
+  #invite-container .mask {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: none; }
+  #invite-container .login-tips {
+    z-index: 11;
+    height: 40px;
+    line-height: 40px;
+    background: gray;
+    width: 150px;
+    border-radius: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    margin-left: -75px;
+    display: none;
+    color: #fff;
+    font-size: 14px; }
+    #invite-container .login-tips span {
+      height: 100px;
+      line-height: 100px;
+      color: #fff; }
+
+.body {
+  background: #f1f1f1; }
+
+#load-container {
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 30px; }
+  #load-container .load-logo img {
+    width: 100%;
+    height: 100%; }
+  #load-container .load-btn-andr {
+    text-align: center;
+    margin-top: -15px; }
+    #load-container .load-btn-andr a {
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      width: 260px;
+      background: #2ea7e0;
+      display: inline-block;
+      border-radius: 5px; }
+      #load-container .load-btn-andr a img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        vertical-align: middle;
+        margin-bottom: 5px; }
+      #load-container .load-btn-andr a span {
+        display: inline-block; }
+  #load-container section {
+    width: 92%;
+    padding: 5px 4%; }
+    #load-container section .code {
+      text-align: center;
+      padding-bottom: 5px;
+      padding-top: 5px; }
+      #load-container section .code img {
+        width: 100px;
+        height: 100px; }
+      #load-container section .code span {
+        display: block;
+        text-align: justify;
+        padding-top: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #999; }
+    #load-container section ul {
+      padding-bottom: 10px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      width: 270px;
+      position: relative;
+      left: 50%;
+      margin-left: -135px; }
+      #load-container section ul li {
+        height: 40px;
+        line-height: 40px;
+        padding-top: 15px; }
+        #load-container section ul li span {
+          padding-left: 10px;
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 14px;
+          text-align: left;
+          float: left; }
+      #load-container section ul img {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        float: left; }
+  #load-container .line {
+    border-top: 5px solid #e5e5e5;
+    display: block; }
+  #load-container ol {
+    font-size: 12px;
+    text-align: left;
+    width: 270px;
+    margin: 0 auto; }
+    #load-container ol li {
+      padding-top: 5px; }
+    #load-container ol li:first-child {
+      padding-top: 20px; }
+  #load-container .ios-sec {
+    margin-top: 20px; }
+    #load-container .ios-sec ul li {
+      padding-top: 20px; }
+
+@media screen and (max-width: 320px) {
+  #invite-container .invite-logo {
+    height: 120px; }
+
+  #load-container .ios-sec {
+    padding: 5px 4%;
+    margin-top: 20px; }
+    #load-container .ios-sec .code {
+      padding: 5px; }
+      #load-container .ios-sec .code img {
+        height: 80px;
+        width: 80px; }
+      #load-container .ios-sec .code span {
+        font-size: 10px;
+        padding-top: 5px; }
+    #load-container .ios-sec ul li {
+      padding-top: 10px; }
+      #load-container .ios-sec ul li span {
+        font-size: 14px; } }

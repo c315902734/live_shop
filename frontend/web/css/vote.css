@@ -1,0 +1,452 @@
+@import url("reset.css");
+.full {
+  width: 100%;
+  height: 100%;
+}
+.r {
+  position: relative;
+}
+.a {
+  position: absolute;
+}
+.f {
+  position: fixed;
+}
+html,
+body,
+.container {
+  width: 100%;
+  height: 100%;
+  font-family: "Microsoft YaHei";
+  font-size: 62.5%;
+}
+.container {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  background: black;
+}
+.header img {
+  width: 100%;
+  display: block;
+}
+.section {
+  -webkit-box-flex: 1;
+  overflow: auto;
+  width: 98%;
+  margin: 0 auto;
+}
+.section .nav {
+  margin-top: 4rem;
+}
+.section .nav img {
+  height: auto;
+  width: auto\9;
+  width: 100%;
+}
+.section .wen {
+  margin-top: 0.8rem;
+}
+.section .wen p {
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  /*-webkit-transform: scale(0.8);*/
+}
+.section .sai {
+  width: 98%;
+  height: 2rem;
+  margin: 0 auto;
+  margin-top: 3.2rem;
+  line-height: 2rem;
+  font-size:12px;
+}
+.section .sai .zuo {
+  width: 26%;
+  height: 2rem;
+  background: url("../localFile/3.png") no-repeat center center;
+  background-size: 100% 100%;
+  float: left;
+  text-align: center;
+  font-weight: 900;
+  display: inlink-block;
+}
+.section .sai .zhong {
+  width: 26%;
+  height: 2rem;
+  background: url("../localFile/3.png") no-repeat center center;
+  background-size: 100% 100%;
+  float: left;
+  text-align: center;
+  margin-left: 12%;
+  display: inlink-block;
+}
+.section .sai .you {
+  width: 26%;
+  height: 2rem;
+  background: url("../localFile/3.png") no-repeat center center;
+  background-size: 100% 100%;
+  float: right;
+  text-align: center;
+  display: inlink-block;
+}
+.section .tu {
+  width: 98%;
+  height: 20.8rem;
+  margin: 0 auto;
+  margin-top: 1.8rem;
+  font-size:12px;
+}
+.section .tu .img1 {
+  width: 46%;
+  height: 20.8rem;
+  float: left;
+  border: 0.1rem solid #444433;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.section .tu .img1 .jiao {
+  width: 19%;
+  height: 2.2rem;
+  position: absolute;
+  left: 82%;
+  top: -0.1rem;
+}
+.section .tu .img1 .jiao img {
+  height: auto;
+  width: auto\9;
+  width: 100%;
+}
+.section .tu .img1 #jian {
+  width: 46%;
+  height: 1.5rem;
+  background: url("../localFile/7.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0.6rem;
+  left: 26%;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Aparajita Bold Italic";
+  font-style: oblique;
+}
+.section .tu .img1 .up {
+  width: 79%;
+  height: 10.8rem;
+  position: absolute;
+  top: 2.3rem;
+  left: 9%;
+}
+.section .tu .img1 .up img {
+  height: auto;
+  width: auto\9;
+  width: 100%;
+}
+.section .tu .img1 .ong {
+  width: 80%;
+  height: 2.2rem;
+  position: absolute;
+  top: 15rem;
+  left: 9%;
+}
+.section .tu .img1 .ong .p1 {
+  display: block;
+  width: 55%;
+  height: 2.2rem;
+  color: white;
+  line-height: 2.2rem;
+  float: left;
+  margin-top: 0.1rem;
+}
+.section .tu .img1 .ong .p2 {
+  display: block;
+  width: 43%;
+  height: 2.2rem;
+  color: white;
+  line-height: 2.2rem;
+  text-align: center;
+  float: right;
+  background: red;
+  border: 0.1rem solid red;
+  border-radius: 1rem;
+}
+.section .tu .img1 .down {
+  width: 79%;
+  height: 1.2rem;
+  position: absolute;
+  top: 18.1rem;
+  left: 8%;
+}
+.section .tu .img1 .down #bar {
+  height: 1.2rem;
+  width: 60%;
+  float: left;
+  background-color: #444444;
+  border: 0.1rem solid #AAA;
+  border-radius: 1rem;
+}
+.section .tu .img1 .down #bar .finish {
+  height: 100%;
+  width: 0%;
+  background-color: red;
+  border-radius: 0.5rem;
+}
+.section .tu .img1 .down #bar .ing {
+  color: #FFF;
+  text-align: center;
+  font-family: "微软雅黑", Verdana, Geneva, sans-serif;
+}
+.section .tu .img1 .down .shu {
+  float: left;
+  color: white;
+  width: 50%;
+  height: 1.2rem;
+  margin-left: 70%;
+  margin-top: -1.5rem;
+}
+.section .tu .img2 {
+  width: 46%;
+  height: 20.8rem;
+  float: right;
+  border: 0.1rem solid #444433;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.section .tu .img2 .jiao {
+  width: 19%;
+  height: 2.2rem;
+  position: absolute;
+  left: 82%;
+  top: -0.1rem;
+}
+.section .tu .img2 .jiao img {
+  height: auto;
+  width: auto\9;
+  width: 100%;
+}
+.section .tu .img2 #jian {
+  width: 46%;
+  height: 1.5rem;
+  background: url("../localFile/7.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0.6rem;
+  left: 26%;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Aparajita Bold Italic";
+  font-style: oblique;
+}
+.section .tu .img2 .up {
+  width: 80%;
+  height: 10.8rem;
+  position: absolute;
+  top: 2.3rem;
+  left: 9%;
+}
+.section .tu .img2 .up img {
+  height: auto;
+  width: auto\9;
+  width: 100%;
+}
+.section .tu .img2 .ong {
+  width: 80%;
+  height: 2.2rem;
+  position: absolute;
+  top: 15rem;
+  left: 9%;
+}
+.section .tu .img2 .ong .p1 {
+  display: block;
+  width: 55%;
+  height: 2.2rem;
+  color: white;
+  line-height: 2.2rem;
+  float: left;
+  margin-top: 0.1rem;
+}
+.section .tu .img2 .ong .p2 {
+  display: block;
+  width: 43%;
+  height: 2.2rem;
+  color: white;
+  line-height: 2.2rem;
+  text-align: center;
+  float: right;
+  background: #fdb327;
+  border: 0.1rem solid #fdb327;
+  border-radius: 1rem;
+}
+.section .tu .img2 .down {
+  width: 79%;
+  height: 1.2rem;
+  position: absolute;
+  top: 18.1rem;
+  left: 8%;
+}
+.section .tu .img2 .down #bar {
+  height: 1.2rem;
+  width: 60%;
+  float: left;
+  background-color: #444444;
+  border: 0.1rem solid #AAA;
+  border-radius: 1rem;
+}
+.section .tu .img2 .down #bar .finish {
+  height: 100%;
+  width: 0%;
+  background-color: #fdb327;
+  border-radius: 0.5rem;
+}
+.section .tu .img2 .down #bar .ing {
+  color: #FFF;
+  text-align: center;
+  font-family: "微软雅黑", Verdana, Geneva, sans-serif;
+}
+.section .tu .img2 .down .shu {
+  float: left;
+  color: white;
+  width: 50%;
+  height: 1.2rem;
+  margin-left: 70%;
+  margin-top: -1.5rem;
+}
+.section .xing {
+  margin-top: 20px;
+  width: 100%;
+  height: 25rem;
+  background: url("../localFile/vv.png") no-repeat center center;
+  background-size: cover;
+}
+.section .xing img {
+  display: block;
+  width: 100%;
+}
+
+/*投票相关*/
+#ze {
+  width: 100%;
+  height: 100%;
+  /*使用z-index必须之前要有定位*/
+  position: absolute;
+  /*遮罩层的背景颜色*/
+  background: black;
+  /*刚开始遮罩层是影藏的*/
+  display: none;
+  /*z-index的索引*/
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+}
+#ze .cg {
+  width: 70%;
+  height: 15rem;
+  margin: 0 auto;
+  margin-top: 8rem;
+  background: url("../localFile/p-15.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: relative;
+}
+#ze .cg .zhi {
+  width: 40%;
+  height: 2rem;
+  position: absolute;
+  top: 10.5rem;
+  left: 31%;
+}
+#ze .cg .zhi img {
+  display: block;
+  width: 100%;
+}
+#ze .sb {
+  width: 70%;
+  height: 15rem;
+  margin: 0 auto;
+  margin-top: 8rem;
+  background: url("../localFile/p-16.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: relative;
+}
+#ze .sb .zhi {
+  width: 40%;
+  height: 2rem;
+  position: absolute;
+  top: 10.5rem;
+  left: 31%;
+}
+#ze .sb .zhi img {
+  display: block;
+  width: 100%;
+}
+#ze .sb .yu {
+  width: 80%;
+  height: 3rem;
+  position: absolute;
+  top: 8rem;
+  left: 10%;
+  text-align: center;
+
+#ze {
+  width: 100%;
+  height: 100%;
+  /*使用z-index必须之前要有定位*/
+  position: absolute;
+  /*遮罩层的背景颜色*/
+  background: black;
+  /*刚开始遮罩层是影藏的*/
+  display: none;
+  /*z-index的索引*/
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+}
+#ze .cg {
+  width: 70%;
+  height: 15rem;
+  margin: 0 auto;
+  margin-top: 8rem;
+  background: url("../localFile/p-15.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: relative;
+}
+#ze .cg .zhi {
+  width: 40%;
+  height: 2rem;
+  position: absolute;
+  top: 10.5rem;
+  left: 31%;
+}
+#ze .cg .zhi img {
+  display: block;
+  width: 100%;
+}
+#ze .sb {
+  width: 100%;
+  height: 15rem;
+  margin: 0 auto;
+  margin-top: 8rem;
+  background: url("../localFile/p-16.png") no-repeat center center;
+  background-size: 100% 100%;
+  position: relative;
+}
+#ze .sb .zhi {
+  width: 40%;
+  height: 2rem;
+  position: absolute;
+  top: 10.5rem;
+  left: 31%;
+}
+#ze .sb .zhi img {
+  display: block;
+  width: 100%;
+}
+#ze .sb .yu {
+  width: 80%;
+  height: 3rem;
+  position: absolute;
+  top: 8rem;
+  left: 10%;
+  text-align: center;
+}
+
+
+
